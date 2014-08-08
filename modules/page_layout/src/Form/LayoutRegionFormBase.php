@@ -9,6 +9,8 @@ namespace Drupal\page_layout\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseDialogCommand;
+use Drupal\Core\Form\FormState;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\page_layout\Ajax\LayoutRegionReload;
 use Drupal\page_layout\Ajax\LayoutReload;
@@ -64,7 +66,7 @@ abstract class LayoutRegionFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, array &$form_state, PageInterface $page = NULL, $page_variant_id = NULL,  $layout_region_id = NULL, $plugin_id = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, PageInterface $page = NULL, $page_variant_id = NULL,  $layout_region_id = NULL, $plugin_id = NULL) {
     $this->page = $page;
     $this->pageVariant = $page->getVariant($page_variant_id);
     $this->pageVariant->init($page->getExecutable());
@@ -102,22 +104,22 @@ abstract class LayoutRegionFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, array &$form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state) {
     // Allow the page variant to validate the form.
-    $plugin_values = array(
+    $plugin_values = new FormState(array(
       'values' => &$form_state['values']['plugin'],
-    );
+    ));
     $this->layoutRegion->validateConfigurationForm($form, $plugin_values);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, array &$form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     // Allow the page variant to submit the form.
-    $plugin_values = array(
+    $plugin_values = new FormState(array(
       'values' => &$form_state['values']['plugin'],
-    );
+    ));
     $this->layoutRegion->submitConfigurationForm($form, $plugin_values);
 
     $this->pageVariant->updateLayoutRegion($this->layoutRegion->id(), array(
@@ -140,7 +142,7 @@ abstract class LayoutRegionFormBase extends FormBase {
       return $response;
     }
 
-    $form_state['redirect_route'] = new Url('page_manager.display_variant_edit', array(
+    $form_state->setRedirect('page_manager.display_variant_edit', array(
       'page' => $this->page->id(),
       'display_variant_id' => $this->pageVariant->id()
     ));

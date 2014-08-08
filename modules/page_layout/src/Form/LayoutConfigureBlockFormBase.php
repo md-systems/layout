@@ -7,6 +7,8 @@
 
 namespace Drupal\page_layout\Form;
 
+use Drupal\Core\Form\FormState;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\page_layout\LayoutStorageInterface;
 
 use Drupal\page_manager\PageInterface;
@@ -71,7 +73,7 @@ abstract class LayoutConfigureBlockFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, array &$form_state, PageInterface $page = NULL, $page_variant_id = NULL, $layout_region_id = NULL, $block_id = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, PageInterface $page = NULL, $page_variant_id = NULL, $layout_region_id = NULL, $block_id = NULL) {
 
     $this->page = $page;
     $this->pageVariant = $this->page->getVariant($page_variant_id);
@@ -111,10 +113,10 @@ abstract class LayoutConfigureBlockFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, array &$form_state) {
-    $settings = array(
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $settings = new FormState(array(
       'values' => &$form_state['values']['settings'],
-    );
+    ));
     // Call the plugin validate handler.
     $this->block->validateConfigurationForm($form, $settings);
   }
@@ -122,11 +124,11 @@ abstract class LayoutConfigureBlockFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, array &$form_state) {
-    $settings = array(
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $settings = new FormState(array(
       'values' => &$form_state['values']['settings'],
       'errors' => $form_state['errors'],
-    );
+    ));
 
     // Call the plugin submit handler.
     $this->block->submitConfigurationForm($form, $settings);
@@ -147,7 +149,7 @@ abstract class LayoutConfigureBlockFormBase extends FormBase {
       return $response;
     }
 
-    return new Url('page_manager.display_variant_edit', array(
+    $form_state->setRedirect('page_manager.display_variant_edit', array(
       'page' => $this->page->id(),
       'display_variant_id' => $this->pageVariant->id()
     ));

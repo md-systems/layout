@@ -8,6 +8,7 @@
 namespace Drupal\page_layout\Plugin\DisplayVariant;
 
 use Drupal\block\BlockPluginInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\layout\LayoutRendererBlockAndContext;
@@ -305,7 +306,7 @@ class LayoutPageVariant extends VariantBase implements LayoutPageVariantInterfac
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, array &$form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     // Adding
     $adding_variant = !isset($this->configuration['layout']);
 
@@ -359,7 +360,7 @@ class LayoutPageVariant extends VariantBase implements LayoutPageVariantInterfac
     return $form;
   }
 
-  public function submitConfigurationForm(array &$form, array &$form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     parent::submitConfigurationForm($form, $form_state);
     $this->configuration['layout'] = $form_state['values']['layout'];
 
