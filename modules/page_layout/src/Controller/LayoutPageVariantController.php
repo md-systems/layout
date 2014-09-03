@@ -7,8 +7,7 @@
 
 namespace Drupal\page_layout\Controller;
 
-use Drupal\block\BlockManagerInterface;
-use Drupal\page_layout\LayoutStorageInterface;
+use Drupal\Core\Block\BlockManagerInterface;
 Use Drupal\Core\Plugin\Context\ContextHandler;
 use Drupal\page_manager\PageInterface;
 
@@ -17,7 +16,6 @@ use Drupal\Component\Utility\String;
 use Drupal\Core\Controller\ControllerBase;
 
 use Drupal\layout\Plugin\LayoutRegion\LayoutConfigurableRegionInterface;
-use Drupal\layout\Plugin\LayoutRegion\LayoutConfigurableRegionBase;
 use Drupal\layout\Plugin\LayoutRegion\LayoutRegionPluginManager;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
