@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\layout\Plugin\LayoutPluginInterface.
+ * Contains \Drupal\layout\Plugin\Layout\LayoutInterface.
  */
 
 namespace Drupal\layout\Plugin\Layout;

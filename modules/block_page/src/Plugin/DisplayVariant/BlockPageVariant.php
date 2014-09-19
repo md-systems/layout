@@ -121,7 +121,7 @@ class BlockPageVariant extends VariantBase implements ContainerFactoryPluginInte
         if ($block instanceof ContextAwarePluginInterface) {
           $this->contextHandler->preparePluginContext($block, $contexts);
         }
-        if ($block->access($this->account)) {
+        if ($block->access($this->account)->isAllowed()) {
           $row = $block->build();
           $block_name = drupal_html_class("block-$block_id");
           $row['#prefix'] = '<div class="' . $block_name . '">';

@@ -9,7 +9,6 @@ namespace Drupal\layout\Plugin\Layout;
 
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Language\LanguageManager;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Plugin\Discovery\YamlDiscoveryDecorator;
 
@@ -31,7 +30,7 @@ class LayoutPluginManager extends DefaultPluginManager {
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
     $plugin_definition_annotation_name = 'Drupal\layout\Annotation\Layout';
-    parent::__construct("Plugin/Layout", $namespaces, $module_handler, $plugin_definition_annotation_name);
+    parent::__construct("Plugin/Layout", $namespaces, $module_handler, '\Drupal\layout\Plugin\Layout\LayoutInterface', $plugin_definition_annotation_name);
     $this->discovery = new YamlDiscoveryDecorator($this->discovery, 'layouts', $module_handler->getModuleDirectories());
 
     $this->defaults += array(

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\layout\Plugin\LayoutRegionPluginInterface.
+ * Contains \Drupal\layout\Plugin\LayoutRegion\LayoutRegionInterface.
  */
 
 namespace Drupal\layout\Plugin\LayoutRegion;

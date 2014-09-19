@@ -9,7 +9,6 @@ namespace Drupal\layout\Plugin\LayoutRegion;
 
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Language\LanguageManager;
 use Drupal\Core\Plugin\DefaultPluginManager;
 
 /**
@@ -32,7 +31,7 @@ class LayoutRegionPluginManager extends DefaultPluginManager {
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
     $plugin_definition_annotation_name = 'Drupal\layout\Annotation\LayoutRegion';
-    parent::__construct("Plugin/LayoutRegion", $namespaces, $module_handler, $plugin_definition_annotation_name);
+    parent::__construct("Plugin/LayoutRegion", $namespaces, $module_handler, '\Drupal\layout\Plugin\LayoutRegion\LayoutRegionInterface', $plugin_definition_annotation_name);
 
     $this->defaults += array(
       'plugin_type' => 'LayoutRegion',
