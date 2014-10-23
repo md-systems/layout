@@ -9,7 +9,6 @@ namespace Drupal\layout\Plugin\Layout;
 
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\layout\Layout;
-use Drupal\layout\Plugin\LayoutRegion\LayoutRegionPluginBag;
 
 /**
  * Provides a base class for Layout plugins.

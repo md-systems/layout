@@ -25,7 +25,7 @@ interface LayoutBlockAndContextProviderInterface {
   /**
    * Returns the plugin bag of LayoutRegions.
    *
-   * @return \Drupal\layout\Plugin\LayoutRegion\LayoutRegionPluginBag
+   * @return \Drupal\layout\Plugin\LayoutRegion\LayoutRegionPluginCollection
    */
   public function getLayoutRegions();
 

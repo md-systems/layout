@@ -20,7 +20,7 @@ use Drupal\page_manager\Plugin\VariantBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Drupal\layout\Layout;
-use Drupal\layout\Plugin\LayoutRegion\LayoutRegionPluginBag;
+use Drupal\layout\Plugin\LayoutRegion\LayoutRegionPluginCollection;
 
 
 /**
@@ -62,7 +62,7 @@ class LayoutPageVariant extends VariantBase implements LayoutPageVariantInterfac
   /**
    * Layout regions.
    *
-   * @var \Drupal\layout\Plugin\LayoutRegion\LayoutRegionPluginBag
+   * @var \Drupal\layout\Plugin\LayoutRegion\LayoutRegionPluginCollection
    */
   public $layoutRegionBag;
 
@@ -126,7 +126,8 @@ class LayoutPageVariant extends VariantBase implements LayoutPageVariantInterfac
    * Initializes the page variant regions on the basis of given layout.
    *
    * @param LayoutInterface $layout
-   * @return LayoutRegionPluginBag|\Drupal\page_layout\Plugin\LayoutRegionPluginBag
+   *
+*@return LayoutRegionPluginCollection|\Drupal\page_layout\Plugin\LayoutRegionPluginCollection
    */
   private function initializeLayoutRegionsFromLayout(LayoutInterface $layout) {
     $this->configuration['regions'] = array();
@@ -170,7 +171,7 @@ class LayoutPageVariant extends VariantBase implements LayoutPageVariantInterfac
       }
 
       $regions_data = $this->configuration['regions'];
-      $this->layoutRegionBag = new LayoutRegionPluginBag(Layout::layoutRegionPluginManager(),
+      $this->layoutRegionBag = new LayoutRegionPluginCollection(Layout::layoutRegionPluginManager(),
         $regions_data
       );
 

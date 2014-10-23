@@ -38,7 +38,7 @@ class PageLayout {
     $actions = array();
     $page = $page_variant->getPage();
 
-    // @note: this is super-hacky; as we are looping the LayoutRegionPluginBag
+    // @note: this is super-hacky; as we are looping the LayoutRegionPluginCollection
     // in self::getGroupedBlockArrays we cannot iterate over it again without
     // resetting / affecting the outer loop :( so that's why we clone.
     $regions = clone $page_variant->getLayoutRegions();
