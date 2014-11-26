@@ -1,7 +1,7 @@
 layout.page_variant_layout_blocks_select:
   path: '/admin/structure/page_manager/manage/{page}/manage/{page_variant_id}/layout/{layout_region_id}/blocks/select'
   defaults:
-    _content: '\Drupal\page_layout\Controller\LayoutPageVariantController::selectBlock'
+    _controller: '\Drupal\page_layout\Controller\LayoutPageVariantController::selectBlock'
     _title: 'Select block'
   requirements:
     _permission: 'administer layouts'
@@ -9,7 +9,7 @@ layout.page_variant_layout_blocks_select:
 layout.page_variant_layout_regions_select:
   path: '/admin/structure/page_manager/manage/{page}/manage/{page_variant_id}/layout/{layout_region_id}/regions/select'
   defaults:
-    _content: '\Drupal\page_layout\Controller\LayoutPageVariantController::selectRegion'
+    _controller: '\Drupal\page_layout\Controller\LayoutPageVariantController::selectRegion'
     _title: 'Select region plugin'
   requirements:
     _permission: 'administer layouts'

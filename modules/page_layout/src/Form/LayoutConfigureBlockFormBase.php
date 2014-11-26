@@ -9,13 +9,11 @@ namespace Drupal\page_layout\Form;
 
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\page_layout\LayoutStorageInterface;
+use Drupal\Core\Plugin\ContextAwarePluginAssignmentTrait;
 
 use Drupal\page_manager\PageInterface;
-use Drupal\page_manager\Plugin\ContextAwarePluginAssignmentTrait;
 use Drupal\Component\Plugin\ContextAwarePluginInterface;
 use Drupal\Core\Form\FormBase;
-use Drupal\Core\Url;
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseDialogCommand;
