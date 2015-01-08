@@ -8,6 +8,7 @@
 namespace Drupal\layout;
 
 use Drupal\Component\Plugin\ContextAwarePluginInterface;
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\String;
 use Drupal\Core\Plugin\Context\ContextHandlerInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -158,7 +159,7 @@ class LayoutRendererBlockAndContext {
    * Returns a HTML safe ID.
    */
   protected function htmlId($id) {
-    return drupal_html_class("block-$id");
+    return Html::cleanCssIdentifier("block-$id");
   }
 
 }

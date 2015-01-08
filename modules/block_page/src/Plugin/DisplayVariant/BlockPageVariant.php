@@ -9,6 +9,7 @@ namespace Drupal\block_page\Plugin\DisplayVariant;
 
 use Drupal\Component\Plugin\ContextAwarePluginInterface;
 use Drupal\Component\Serialization\Json;
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -112,7 +113,7 @@ class BlockPageVariant extends VariantBase implements ContainerFactoryPluginInte
         continue;
       }
 
-      $region_name = drupal_html_class("block-region-$region");
+      $region_name = Html::cleanCssIdentifier("block-region-$region");
       $build[$region]['#prefix'] = '<div class="' . $region_name . '">';
       $build[$region]['#suffix'] = '</div>';
 
@@ -123,7 +124,7 @@ class BlockPageVariant extends VariantBase implements ContainerFactoryPluginInte
         }
         if ($block->access($this->account)->isAllowed()) {
           $row = $block->build();
-          $block_name = drupal_html_class("block-$block_id");
+          $block_name = Html::cleanCssIdentifier("block-$block_id");
           $row['#prefix'] = '<div class="' . $block_name . '">';
           $row['#suffix'] = '</div>';
 
