@@ -110,7 +110,7 @@ class LayoutRendererBlockAndContext {
         $this->contextHandler->applyContextMapping($block, $contexts, $mapping);
       }
 
-      if ($block->access($this->account)->isAllowed()) {
+      if ($block->access($this->account)) {
         $block_render_array = array(
           '#theme' => 'block',
           '#attributes' => array(),
