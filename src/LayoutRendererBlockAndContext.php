@@ -9,7 +9,7 @@ namespace Drupal\layout;
 
 use Drupal\Component\Plugin\ContextAwarePluginInterface;
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Plugin\Context\ContextHandlerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\layout\Plugin\Layout\LayoutBlockAndContextProviderInterface;
@@ -120,7 +120,7 @@ class LayoutRendererBlockAndContext {
           '#base_plugin_id' => $block->getBaseId(),
           '#derivative_plugin_id' => $block->getDerivativeId(),
         );
-        $block_render_array['#configuration']['label'] = String::checkPlain($block_render_array['#configuration']['label']);
+        $block_render_array['#configuration']['label'] = SafeMarkup::checkPlain($block_render_array['#configuration']['label']);
         $block_render_array['content'] = $block->build();
 
         $renderArray[] = $block_render_array;

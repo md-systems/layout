@@ -5,11 +5,6 @@
  * Preprocessors and helper functions to make theming easier.
  */
 
-use Drupal\Component\Utility\String;
-use Drupal\Component\Utility\Xss;
-use Drupal\Core\Language\Language;
-use Drupal\Core\Template\Attribute;
-
 /**
  * Prepares variables for Layouts.
  *
