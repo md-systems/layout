@@ -7,12 +7,12 @@
 
 namespace Drupal\page_layout\Controller;
 
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Block\BlockManagerInterface;
 Use Drupal\Core\Plugin\Context\ContextHandler;
 use Drupal\page_manager\PageInterface;
 
 use Drupal\Component\Serialization\Json;
-use Drupal\Component\Utility\String;
 use Drupal\Core\Controller\ControllerBase;
 
 use Drupal\layout\Plugin\LayoutRegion\LayoutConfigurableRegionInterface;
@@ -96,7 +96,7 @@ class LayoutPageVariantController extends ControllerBase {
     $plugins = $this->blockManager->getDefinitionsForContexts($page->getContexts());
 
     foreach ($plugins as $plugin_id => $plugin_definition) {
-      $category = String::checkPlain($plugin_definition['category']);
+      $category = SafeMarkup::checkPlain($plugin_definition['category']);
       $category_key = 'category-' . $category;
       if (!isset($form['place_blocks']['list'][$category_key])) {
         $form['place_blocks']['list'][$category_key] = array(
@@ -169,7 +169,7 @@ class LayoutPageVariantController extends ControllerBase {
     foreach ($definitions as $plugin_id => $plugin_definition) {
       $plugin = $this->layoutRegionManager->createInstance($plugin_id, array());
       if (is_subclass_of($plugin, 'Drupal\layout\Plugin\LayoutRegion\LayoutConfigurableRegionInterface')) {
-        $category = isset($plugin_definition['category']) ? String::checkPlain($plugin_definition['category']) : '';
+        $category = isset($plugin_definition['category']) ? SafeMarkup::checkPlain($plugin_definition['category']) : '';
         $category_key = 'category-' . $category;
         if (!isset($form['place_regions']['list'][$category_key])) {
           $form['place_regions']['list'][$category_key] = array(
