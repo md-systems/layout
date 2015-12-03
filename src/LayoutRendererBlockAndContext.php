@@ -7,6 +7,7 @@
 
 namespace Drupal\layout;
 
+use Drupal\Component\Plugin\ConfigurablePluginInterface;
 use Drupal\Component\Plugin\ContextAwarePluginInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\SafeMarkup;
@@ -15,7 +16,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\layout\Plugin\Layout\LayoutBlockAndContextProviderInterface;
 use Drupal\layout\Plugin\Layout\LayoutInterface;
 use Drupal\layout\Plugin\LayoutRegion\LayoutRegionInterface;
-use Drupal\search_api\Plugin\ConfigurablePluginInterface;
 
 /**
  * Renders a layout using a block and context provider.
@@ -100,14 +100,7 @@ class LayoutRendererBlockAndContext {
     $renderArray = array();
     foreach ($blocksInRegion as $id => $block) {
       if ($block instanceof ContextAwarePluginInterface) {
-        $mapping = array();
-        if ($block instanceof ConfigurablePluginInterface) {
-          $configuration = $block->getConfiguration();
-          if (isset($configuration['context_mapping'])) {
-            $mapping = array_flip($configuration['context_mapping']);
-          }
-        }
-        $this->contextHandler->applyContextMapping($block, $contexts, $mapping);
+        $this->contextHandler->applyContextMapping($block, $contexts);
       }
 
       if ($block->access($this->account)) {
