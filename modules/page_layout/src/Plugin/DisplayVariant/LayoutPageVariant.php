@@ -7,16 +7,15 @@
 
 namespace Drupal\page_layout\Plugin\DisplayVariant;
 
-use Drupal\block\BlockPluginInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\ctools\Plugin\DisplayVariant\BlockDisplayVariant;
 use Drupal\layout\LayoutRendererBlockAndContext;
 use Drupal\layout\Plugin\Layout\LayoutInterface;
 use Drupal\page_layout\PageLayout;
 use Drupal\page_layout\Plugin\LayoutPageVariantInterface;
 use Drupal\Core\Plugin\Context\ContextHandler;
-use Drupal\page_manager\Plugin\VariantBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Drupal\layout\Layout;
@@ -31,7 +30,7 @@ use Drupal\layout\Plugin\LayoutRegion\LayoutRegionPluginCollection;
  *   admin_label = @Translation("Layout page")
  * )
  */
-class LayoutPageVariant extends VariantBase implements LayoutPageVariantInterface, ContainerFactoryPluginInterface {
+class LayoutPageVariant extends BlockDisplayVariant implements LayoutPageVariantInterface, ContainerFactoryPluginInterface {
   /**
    * The context handler.
    *
@@ -295,7 +294,7 @@ class LayoutPageVariant extends VariantBase implements LayoutPageVariantInterfac
   /**
    * {@inheritdoc}
    */
-  public function render() {
+  public function build() {
     if ($this->getLayoutId() && $layout = $this->getLayout()) {
       $renderer = new LayoutRendererBlockAndContext($this->contextHandler, $this->account);
       $output = $renderer->build($layout, $this);

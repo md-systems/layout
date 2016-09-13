@@ -1,8 +1,8 @@
 <?php
 namespace Drupal\page_layout\Plugin;
 
+use Drupal\Core\Display\VariantInterface;
 use Drupal\layout\Plugin\Layout\LayoutBlockAndContextProviderInterface;
-use \Drupal\page_manager\Plugin\VariantInterface;
 
 interface LayoutPageVariantInterface extends VariantInterface, LayoutBlockAndContextProviderInterface {
   /**
